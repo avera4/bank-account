@@ -1,10 +1,12 @@
 class BankAccount:
     title = "Harvest & Trustee"
 
-    def __init__(self, customer_name, current_balance, minimum_balance):
+    def __init__(self, customer_name, current_balance, minimum_balance, account_number, routing_number):
         self.customer_name = customer_name
         self.current_balance = current_balance
         self.minimum_balance = minimum_balance
+        self.__account_number = account_number
+        self._routing_number = routing_number
 
     def deposit(self, amount):
         self.current_balance += amount
@@ -25,8 +27,8 @@ class BankAccount:
               f"Minimum Balance: {self.minimum_balance}")
 
 class Savings(BankAccount):
-    def __init__(self, customer_name, current_balance, minimum_balance, interest):
-        super().__init__(customer_name, current_balance, minimum_balance)
+    def __init__(self, customer_name, current_balance, minimum_balance, account_number, routing_number, interest):
+        super().__init__(customer_name, current_balance, minimum_balance, account_number, routing_number)
         self.interest = interest
 
     def apply_interest(self):
@@ -37,8 +39,8 @@ class Savings(BankAccount):
         print(f"Interest Rate: {self.interest}\n")
 
 class Checking(BankAccount):
-    def __init__(self, customer_name, current_balance, minimum_balance, transfer_limit):
-        super().__init__(customer_name, current_balance, minimum_balance)
+    def __init__(self, customer_name, current_balance, minimum_balance, account_number, routing_number, transfer_limit):
+        super().__init__(customer_name, current_balance, minimum_balance, account_number, routing_number)
         self.transfer_limit = transfer_limit
 
     def apply_transfer(self, account, amount):
@@ -53,12 +55,12 @@ class Checking(BankAccount):
         super().print_customer_information()
         print(f"Transfer Limit: {self.transfer_limit}\n")
 
-ba1 = Savings("Ariel Vera", 100, 25, 0.5)
+ba1 = Savings("Ariel Vera", 100, 25, 22135099, 606047593, 0.5)
 ba1.print_customer_information()
 ba1.apply_interest()
 ba1.print_customer_information()
 
-ba2 = Checking("Travis Marshall", 2500, 500, 500)
+ba2 = Checking("Travis Marshall", 2500, 500, 41096590, 693011257, 500)
 ba2.print_customer_information()
 ba2.apply_transfer(ba1, 350)
 ba2.print_customer_information()
